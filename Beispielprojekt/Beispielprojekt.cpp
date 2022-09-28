@@ -1,12 +1,14 @@
 #include <Gosu/Gosu.hpp>
 #include <Gosu/AutoLink.hpp>
+using namespace std;
 
 class GameWindow : public Gosu::Window
 {
 public:
-
+	Gosu::Image bild;
 	GameWindow()
-		: Window(800, 600)
+		: Window(1100, 600, true)
+		, bild("raumschiff21.png")
 	{
 		set_caption("Gosu Tutorial mit Git");
 	}
@@ -16,16 +18,18 @@ public:
 	// dann werden `draw` Aufrufe ausgelassen und die Framerate sinkt
 	void draw() override
 	{
-		graphics().draw_line(
-			10, 20, Gosu::Color::RED,
-			200, 100, Gosu::Color::GREEN,
-			0.0
-		);
+		bild.draw_rot(x, y, 0.0, 0.0, 0.5, 0.5);
+
 	}
+	double x;
+	double y;
+	double rot;
 
 	// Wird 60x pro Sekunde aufgerufen
 	void update() override
 	{
+		x = input().mouse_x();
+		y = input().mouse_y();
 	}
 };
 
